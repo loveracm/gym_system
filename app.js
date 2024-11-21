@@ -28,3 +28,18 @@ const exerciseRoutes = require('./routes/exerciseRoutes');
 
 app.use('/api/muscles', muscleRoutes);
 app.use('/api/exercises', exerciseRoutes);
+
+const authRoutes = require('./routes/authRoutes');
+
+app.use('/api/auth', authRoutes);
+
+const shiftRoutes = require('./routes/shiftRoutes');
+
+app.use('/api/shifts', shiftRoutes);
+
+const errorHandler = require('./middlewares/errorHandler');
+
+// Otros middlewares y rutas aquí...
+
+// Middleware para manejar errores
+app.use(errorHandler);
