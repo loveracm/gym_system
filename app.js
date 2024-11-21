@@ -1,15 +1,16 @@
 // app.js
-// Importamos las dependencias necesarias
 const express = require('express');
 const db = require('./config/db');
+const userRoutes = require('./routes/userRoutes');
 
-// Creamos la aplicación Express
 const app = express();
 
-// Middleware para analizar JSON en las solicitudes
 app.use(express.json());
 
-// Ruta principal para probar la conexión
+// Rutas principales
+app.use('/api/users', userRoutes);
+
+// Prueba de conexión inicial
 app.get('/', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT 1 + 1 AS result');
@@ -19,6 +20,5 @@ app.get('/', async (req, res) => {
   }
 });
 
-// Configuramos el puerto
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
