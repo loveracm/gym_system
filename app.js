@@ -22,3 +22,9 @@ app.get('/', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
+
+const muscleRoutes = require('./routes/muscleRoutes');
+const exerciseRoutes = require('./routes/exerciseRoutes');
+
+app.use('/api/muscles', muscleRoutes);
+app.use('/api/exercises', exerciseRoutes);
