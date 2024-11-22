@@ -12,3 +12,17 @@ exports.createMuscle = async (name, description) => {
   const [result] = await db.query('INSERT INTO muscles (name, description) VALUES (?, ?)', [name, description]);
   return result.insertId;
 };
+
+// models/muscleModel.js
+exports.updateMuscle = async (id, name, description) => {
+  const [result] = await db.query(
+    'UPDATE muscles SET name = ?, description = ? WHERE id = ?',
+    [name, description, id]
+  );
+  return result.affectedRows;
+};
+
+exports.deleteMuscle = async (id) => {
+  const [result] = await db.query('DELETE FROM muscles WHERE id = ?', [id]);
+  return result.affectedRows;
+};

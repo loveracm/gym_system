@@ -74,3 +74,32 @@ exports.updateShiftStatus = async (req, res, next) => {
     next(error); // Pasamos el error al middleware
   }
 };
+
+exports.getShifts = async (req, res, next) => {
+  try {
+    const { role, id } = req.user;
+
+    let shifts;
+    if (role === 'trainer') {
+      // Los entrenadores ven todos los turnos
+      shifts = await Shift.getAllShifts();
+    } else if (role === 'student') {
+      // Los estudiantes solo ven sus turnos
+      shifts = await db.query(
+        `SELECT shifts.id, shifts.date, shifts.time, shifts.status,
+                trainers.name AS trainer_name
+         FROM shifts
+         LEFT JOIN users AS trainers ON shifts.trainer_id = trainers.id
+         WHERE shifts.student_id = ?`,
+        [id]
+      );
+      shifts = shifts[0];
+    } else {
+      return res.status(403).json({ error: 'No tienes permiso para ver esta información.' });
+    }
+
+    res.status(200).json(shifts);
+  } catch (error) {
+    next(error);
+  }
+};

@@ -17,3 +17,17 @@ exports.createExercise = async (name, muscle_id, description) => {
   [name, muscle_id, description]);
   return result.insertId;
 };
+
+// models/exerciseModel.js
+exports.updateExercise = async (id, name, muscle_id, description) => {
+  const [result] = await db.query(
+    'UPDATE exercises SET name = ?, muscle_id = ?, description = ? WHERE id = ?',
+    [name, muscle_id, description, id]
+  );
+  return result.affectedRows;
+};
+
+exports.deleteExercise = async (id) => {
+  const [result] = await db.query('DELETE FROM exercises WHERE id = ?', [id]);
+  return result.affectedRows;
+};
