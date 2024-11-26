@@ -1,17 +1,17 @@
-// db.js
-// Importamos el módulo `mysql2` para conectar con la base de datos.
+
+/* Importa el modulo `mysql2` para conectar con la base de datos*/
 const mysql = require('mysql2');
 
-// Configuramos la conexión con la base de datos MySQL.
+/* Configura la conexion con la base de datos MySQL*/
 const pool = mysql.createPool({
-  host: 'localhost', // Cambia si tu servidor no está en localhost
-  user: 'root',      // Usuario de tu base de datos
-  password: '1995',  // Contraseña de tu base de datos
-  database: 'gym_system', // Nombre de la base de datos
+  host: 'localhost', /* servidor localhost*/
+  user: 'root',      /* Usuario de base de datos*/
+  password: '1995',  /* Contraseña base de datos*/
+  database: 'gym_system', /* Base de datos*/
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
 
-// Exportamos el pool para que sea reutilizable en todo el proyecto.
+/* Exporta el pool para que sea reutilizable en todo el proyecto.*/
 module.exports = pool.promise();

@@ -1,8 +1,7 @@
-// controllers/userController.js
-// Importamos el pool de conexión a la base de datos
+/* Importamos el pool de conexión a la base de datos*/
 const db = require('../config/db');
 
-// Controlador para obtener todos los usuarios
+/*Controlador para obtener todos los usuarios*/
 exports.getUsers = async (req, res) => {
   try {
     const [users] = await db.query('SELECT id, name, email, role, created_at FROM users');
@@ -12,7 +11,7 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-// Controlador para obtener un usuario por su ID
+/*Controlador para obtener un usuario por su ID*/
 exports.getUserById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -26,7 +25,7 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-// Controlador para crear un nuevo usuario
+/*Controlador para crear un nuevo usuario*/
 exports.createUser = async (req, res) => {
   const { name, email, password, role } = req.body;
   try {
@@ -38,7 +37,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// Controlador para actualizar un usuario
+/* Controlador para actualizar un usuario*/
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
   const { name, email, password, role } = req.body;
@@ -54,7 +53,7 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-// Controlador para eliminar un usuario
+/*Controlador para eliminar un usuario*/
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;
   try {

@@ -1,4 +1,3 @@
-// controllers/exerciseController.js
 const Exercise = require('../models/exerciseModel');
 
 exports.getExercises = async (req, res) => {
@@ -20,7 +19,6 @@ exports.createExercise = async (req, res) => {
   }
 };
 
-// controllers/exerciseController.js
 exports.updateExercise = async (req, res) => {
   const { id } = req.params;
   const { name, muscle_id, description } = req.body;

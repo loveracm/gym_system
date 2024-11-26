@@ -1,7 +1,6 @@
-// models/shiftModel.js
 const db = require('../config/db');
 
-// Función para obtener todos los turnos
+/*Obtener todos los turnos*/
 exports.getAllShifts = async () => {
   const [rows] = await db.query(
     `SELECT shifts.id, shifts.date, shifts.time, shifts.status,
@@ -13,7 +12,7 @@ exports.getAllShifts = async () => {
   return rows;
 };
 
-// Función para crear un turno
+/*Crear un turno*/
 exports.createShift = async (date, time, trainer_id, student_id) => {
   const [result] = await db.query(
     'INSERT INTO shifts (date, time, trainer_id, student_id) VALUES (?, ?, ?, ?)',
@@ -22,7 +21,7 @@ exports.createShift = async (date, time, trainer_id, student_id) => {
   return result.insertId;
 };
 
-// Función para actualizar el estado de un turno
+/*Actualizar el estado de un turno*/
 exports.updateShiftStatus = async (id, status) => {
   const [result] = await db.query('UPDATE shifts SET status = ? WHERE id = ?', [status, id]);
   return result.affectedRows;
@@ -34,12 +33,12 @@ exports.deleteShift = async (id) => {
   return result.affectedRows;
 };
 
-// Verificar si un turno ya existe
+/*Verificar si un turno ya existe*/
 exports.isShiftDuplicated = async (date, time, trainer_id, student_id) => {
   const [rows] = await db.query(
     `SELECT id FROM shifts 
      WHERE date = ? AND time = ? AND trainer_id = ? AND student_id = ?`,
     [date, time, trainer_id, student_id]
   );
-  return rows.length > 0; // Devuelve true si existe un turno duplicado
+  return rows.length > 0; /*Devuelve true (verdad) si existe un turno duplicado*/
 };

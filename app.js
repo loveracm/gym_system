@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const db = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
@@ -7,10 +6,10 @@ const app = express();
 
 app.use(express.json());
 
-// Rutas principales
+/*Rutas principales*/
 app.use('/api/users', userRoutes);
 
-// Prueba de conexión inicial
+/*Prueba de conexión inicial*/
 app.get('/', async (req, res) => {
   try {
     const [rows] = await db.query('SELECT 1 + 1 AS result');
@@ -39,7 +38,5 @@ app.use('/api/shifts', shiftRoutes);
 
 const errorHandler = require('./middlewares/errorHandler');
 
-// Otros middlewares y rutas aquí...
-
-// Middleware para manejar errores
+/*Middleware para manejar errores*/
 app.use(errorHandler);

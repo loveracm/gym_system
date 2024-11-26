@@ -4,7 +4,7 @@ const { getUsers, createUser, getUserById, updateUser, deleteUser } = require('.
 
 const router = express.Router();
 
-// Proteger todas las rutas con `verifyToken`
+/*Protege todas las rutas con `verifyToken`*/
 router.get('/', verifyToken, getUsers);
 router.get('/:id', verifyToken, getUserById);
 router.post('/', verifyToken, createUser);

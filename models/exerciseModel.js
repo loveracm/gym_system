@@ -1,7 +1,6 @@
-// models/exerciseModel.js
 const db = require('../config/db');
 
-// Función para obtener todos los ejercicios
+/*Obtener todos los ejercicios*/
 exports.getAllExercises = async () => {
   const [rows] = await db.query(
     `SELECT exercises.id, exercises.name, exercises.description, muscles.name AS muscle
@@ -11,14 +10,14 @@ exports.getAllExercises = async () => {
   return rows;
 };
 
-// Función para crear un ejercicio
+/*crear un ejercicio*/
 exports.createExercise = async (name, muscle_id, description) => {
   const [result] = await db.query('INSERT INTO exercises (name, muscle_id, description) VALUES (?, ?, ?)', 
   [name, muscle_id, description]);
   return result.insertId;
 };
 
-// models/exerciseModel.js
+/*crear un ejercicio*/
 exports.updateExercise = async (id, name, muscle_id, description) => {
   const [result] = await db.query(
     'UPDATE exercises SET name = ?, muscle_id = ?, description = ? WHERE id = ?',
@@ -27,6 +26,7 @@ exports.updateExercise = async (id, name, muscle_id, description) => {
   return result.affectedRows;
 };
 
+/*crear un ejercicio*/
 exports.deleteExercise = async (id) => {
   const [result] = await db.query('DELETE FROM exercises WHERE id = ?', [id]);
   return result.affectedRows;

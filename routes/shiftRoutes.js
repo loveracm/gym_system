@@ -1,19 +1,20 @@
+/*Shift (Turnos)*/
 const express = require('express');
 const { verifyToken, verifyRole } = require('../middlewares/authMiddleware');
 const { getShifts, createShift, updateShiftStatus, deleteShift } = require('../controllers/shiftController');
 
 const router = express.Router();
 
-// Obtener todos los turnos (entrenadores y estudiantes)
+/*Todos los turnos (entrenadores y estudiantes)*/
 router.get('/', verifyToken, getShifts);
 
-// Crear un nuevo turno (solo entrenadores)
+/*Crear un nuevo turno (solo entrenador)*/
 router.post('/', verifyToken, verifyRole(['trainer']), createShift);
 
-// Actualizar el estado de un turno (solo entrenadores)
+/*Actualiza el estado de un turno (solo entrenador)*/
 router.put('/:id', verifyToken, verifyRole(['trainer']), updateShiftStatus);
 
-// Eliminar un turno (solo entrenadores)
+/*Elimina un turno (solo entrenador)*/
 router.delete('/:id', verifyToken, verifyRole(['trainer']), deleteShift);
 
 module.exports = router;

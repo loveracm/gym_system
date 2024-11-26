@@ -1,4 +1,3 @@
-// controllers/muscleController.js
 const Muscle = require('../models/muscleModel');
 
 exports.getMuscles = async (req, res) => {
@@ -20,7 +19,6 @@ exports.createMuscle = async (req, res) => {
   }
 };
 
-// controllers/muscleController.js
 exports.updateMuscle = async (req, res) => {
   const { id } = req.params;
   const { name, description } = req.body;
