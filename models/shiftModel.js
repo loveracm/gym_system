@@ -27,7 +27,7 @@ exports.updateShiftStatus = async (id, status) => {
   return result.affectedRows;
 };
 
-// Función para eliminar un turno
+/*Función para eliminar un turno*/
 exports.deleteShift = async (id) => {
   const [result] = await db.query('DELETE FROM shifts WHERE id = ?', [id]);
   return result.affectedRows;

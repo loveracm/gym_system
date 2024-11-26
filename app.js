@@ -1,6 +1,11 @@
 const express = require('express');
 const db = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
+const muscleRoutes = require('./routes/muscleRoutes');
+const exerciseRoutes = require('./routes/exerciseRoutes');
+const authRoutes = require('./routes/authRoutes');
+const shiftRoutes = require('./routes/shiftRoutes');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
@@ -8,6 +13,10 @@ app.use(express.json());
 
 /*Rutas principales*/
 app.use('/api/users', userRoutes);
+app.use('/api/muscles', muscleRoutes);
+app.use('/api/exercises', exerciseRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/shifts', shiftRoutes);
 
 /*Prueba de conexión inicial*/
 app.get('/', async (req, res) => {
@@ -19,24 +28,8 @@ app.get('/', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
-
-const muscleRoutes = require('./routes/muscleRoutes');
-const exerciseRoutes = require('./routes/exerciseRoutes');
-
-app.use('/api/muscles', muscleRoutes);
-app.use('/api/exercises', exerciseRoutes);
-
-const authRoutes = require('./routes/authRoutes');
-
-app.use('/api/auth', authRoutes);
-
-const shiftRoutes = require('./routes/shiftRoutes');
-
-app.use('/api/shifts', shiftRoutes);
-
-const errorHandler = require('./middlewares/errorHandler');
-
 /*Middleware para manejar errores*/
 app.use(errorHandler);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor escuchando en el puerto ${PORT}`));
